@@ -2,6 +2,7 @@ import React from "react";
 import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
+import AskQuestion from "./components/AskQuestion";
 
 const Page = () => {
   return (
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
+      },
+      {
+        path: "/ask-question",
+        element: <AskQuestion />,
       },
     ],
   },

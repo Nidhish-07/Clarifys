@@ -11,7 +11,7 @@ const Mainpage = () => {
           <h2 className="font-normal text-2xl text-[rgba(0,0,0,0.8)]">
             All questions
           </h2>
-          <Link>
+          <Link to={"/ask-question"}>
             <button className="p-2 bg-blue-600 text-white rounded cursor-pointer">
               Ask Question
             </button>
