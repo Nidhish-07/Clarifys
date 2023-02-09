@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
     "firebase": "^9.17.1",
     "html-react-parser": "^3.0.8",
     "localforage": "^1.10.0",
