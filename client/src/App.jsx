@@ -1,15 +1,22 @@
 import React from "react";
 import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
-import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  Outlet,
+  Navigate,
+  Route,
+} from "react-router-dom";
 import AskQuestion from "./components/AskQuestion";
 import Question from "./components/Question/index.jsx";
 import Auth from "./auth";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "./store/userSlice";
+import { login, selectUser, logout } from "./store/userSlice";
 import { auth } from "../firebase";
+import { getAuth } from "firebase/auth";
 
-const Page = () => {
+const PrivateOutlet = () => {
   return (
     <div>
       <Navbar />
@@ -17,12 +24,15 @@ const Page = () => {
       <Outlet />
     </div>
   );
+  // const auth=getAuth()
+  // let auth = { token: false };
+  // return auth.token ? <Outlet /> : <Navigate to="/auth" />;
 };
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Page />,
+    element: <PrivateOutlet />,
     children: [
       {
         path: "/",
@@ -45,9 +55,23 @@ const App = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  React.useEffect(()=>{
-// auth.onAuthStateChanged()
-  },[])
+  React.useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch(
+          login({
+            uid: authUser.uid,
+            photo: authUser.photoURL,
+            displayName: authUser.displayName,
+            email: authUser.email,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, [dispatch]);
+
   return (
     <div>
       <RouterProvider router={router} />

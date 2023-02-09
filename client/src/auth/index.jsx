@@ -6,6 +6,7 @@ import {
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GrFacebook } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 import { auth, provider } from "../../firebase";
 
 const Index = () => {
@@ -16,11 +17,13 @@ const Index = () => {
   const [username, setUsername] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const navigate = useNavigate();
 
   const signInHandlerGoogle = () => {
     signInWithPopup(auth, provider).then((res) => {
       // console.log(res);
       setLoading(false);
+      navigate("/")
     });
   };
 
@@ -57,8 +60,9 @@ const Index = () => {
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setLoading(false);
+          navigate("/");
         })
         .catch((err) => {
           setError(err.message);
@@ -119,7 +123,6 @@ const Index = () => {
                   onClick={registerHandler}
                   disabled={loading}
                 >
-                  
                   {loading ? "Registering....." : "Register"}
                 </button>
               </div>
@@ -160,7 +163,9 @@ const Index = () => {
             </p>
           </div>
         </div>
-        {error!==""&&(<p className="text-red-500 text-sm font-semibold">{error}</p>)}
+        {error !== "" && (
+          <p className="text-red-500 text-sm font-semibold">{error}</p>
+        )}
       </div>
     </div>
   );

@@ -5,9 +5,14 @@ import { TbStack3 } from "react-icons/tb";
 import { AiOutlineInbox } from "react-icons/ai";
 import { IoPersonCircleSharp } from "react-icons/io5";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/userSlice";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
+  const user = useSelector(selectUser);
+  const navigate=useNavigate()
   return (
     <div className="border-2 border-zinc-400 min-h-[48px] flex sticky z-50 top-0">
       <div className="flex w-full items-center justify-around bg-slate-200 shadow-xl">
@@ -33,12 +38,14 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div className="flex ">
+        <div className="flex">
           <div className="flex items-center px-2 py-1">
             <IoPersonCircleSharp
               color="#ccc"
               className="cursor-pointer hover:bg-black rounded-full p-[0.5px]"
               size={32}
+              onClick={() =>{ auth.signOut();navigate("/auth")}}
+              src={user?.photoURL}
             />
             <AiOutlineInbox
               color="#ccc"
