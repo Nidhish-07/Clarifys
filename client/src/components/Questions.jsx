@@ -23,7 +23,7 @@ const Questions = () => {
           </div>
         </div>
         <div className="flex flex-col w-full ">
-          <Link className="text-[1.1rem] text-blue-500 mb-2 hover:text-blue-800">
+          <Link className="text-[1.1rem] text-blue-500 mb-2 hover:text-blue-800" to={"/question"}>
             Bindings not found in Swc
           </Link>
           <div className="w-[90%]">
