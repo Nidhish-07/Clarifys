@@ -31,9 +31,9 @@ const Navbar = () => {
         </div>
         <div className="flex ">
           <div className="flex items-center px-2 py-1">
-            <IoPersonCircleSharp color="#ccc" className="cursor-pointer" />
-            <AiOutlineInbox color="#ccc" className="cursor-pointer" />
-            <TbStack3 color="#ccc" className="cursor-pointer" />
+            <IoPersonCircleSharp color="#ccc" className="cursor-pointer hover:bg-black rounded-full p-[0.5px]" size={32}/>
+            <AiOutlineInbox color="#ccc" className="cursor-pointer hover:bg-black rounded-full p-[0.5px]" size={32}/>
+            <TbStack3 color="#ccc" className="cursor-pointer hover:bg-black rounded-full p-[0.5px]" size={32}/>
           </div>
         </div>
       </div>

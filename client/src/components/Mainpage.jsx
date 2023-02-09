@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Mainpage = () => {
   return (
-    <div className="flex py-7 px-2 flex-[0.75] flex-col">
+    <div className="flex py-7 px-2 flex-[0.75] flex-col md:flex-[0.6]">
       <div className="flex flex-col w-full ">
         <div className="flex w-full justify-between items-center mb-2">
           <h2 className="font-normal text-2xl text-[rgba(0,0,0,0.8)]">
@@ -39,6 +39,10 @@ const Mainpage = () => {
         </div>
         <div className="flex flex-col w-full ">
           <div className="flex flex-col  py-4 px-0 border-b border-b-gray-400">
+            <Questions />
+            <Questions />
+            <Questions />
+            <Questions />
             <Questions />
           </div>
         </div>
