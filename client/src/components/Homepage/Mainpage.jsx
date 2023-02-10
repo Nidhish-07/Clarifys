@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFilter } from "react-icons/fa";
-import Questions from "./Questions";
+import Questions from "../Questions/Questions";
 import { Link } from "react-router-dom";
 
 const Mainpage = (props) => {
@@ -39,8 +39,11 @@ const Mainpage = (props) => {
         </div>
         <div className="flex flex-col w-full ">
           {props.questions.map((question, index) => (
-            <div className="flex flex-col  py-4 px-0 border-b border-b-gray-400">
-              <Questions key={index} question={question} />
+            <div
+              className="flex flex-col  py-4 px-0 border-b border-b-gray-400"
+              key={index}
+            >
+              <Questions question={question} />
             </div>
           ))}
         </div>

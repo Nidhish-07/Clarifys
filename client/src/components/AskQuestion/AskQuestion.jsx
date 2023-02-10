@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import { TagsInput } from "react-tag-input-component";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser, logout } from "../store/userSlice.js";
+import { login, selectUser, logout } from "../../store/userSlice.js";
 import axios from "axios";
 
 const AskQuestion = () => {

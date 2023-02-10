@@ -1,14 +1,15 @@
 import React from "react";
-import Homepage from "./components/Homepage";
+import Homepage from "./components/Homepage/Homepage";
 import Navbar from "./components/Navbar";
 import {
-  RouterProvider,
-  createBrowserRouter,
-  Outlet,
-  Navigate,
+  BrowserRouter as Router,
   Route,
+  Routes,
+  // Switch,
+  Navigate,
+  Outlet,
 } from "react-router-dom";
-import AskQuestion from "./components/AskQuestion";
+import AskQuestion from "./components/AskQuestion/AskQuestion";
 import Question from "./components/Question/index.jsx";
 import Auth from "./auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,40 +17,76 @@ import { login, selectUser, logout } from "./store/userSlice";
 import { auth } from "../firebase";
 import { getAuth } from "firebase/auth";
 
-const PrivateOutlet = () => {
-  return (
+const Page = () => {
+  // return (
+  //   <div>
+  //     <Navbar />
+
+  //     <Outlet />
+  //   </div>
+  // );
+  const user = useAuth();
+  return user ? (
     <div>
       <Navbar />
-
       <Outlet />
     </div>
+  ) : (
+    <Navigate to="/auth" replace />
   );
-  // const auth=getAuth()
-  // let auth = { token: false };
-  // return auth.token ? <Outlet /> : <Navigate to="/auth" />;
 };
+// const PrivateRoute = ({ component: Component, ...rest }) => (
+//   <Route
+//     {...rest}
+//     render={(props) =>
+//       user ? (
+//         <Component {...props} />
+//       ) : (
+//         <Navigate
+//           to={{
+//             pathname: "/auth",
+//             state: {
+//               from: props.location,
+//             },
+//           }}
+//         />
+//       )
+//     }
+//   />
+// );
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <PrivateOutlet />,
-    children: [
-      {
-        path: "/",
-        element: <Homepage />,
-      },
-      {
-        path: "/ask-question",
-        element: <AskQuestion />,
-      },
-      {
-        path: "/question",
-        element: <Question />,
-      },
-      { path: "/auth", element: <Auth /> },
-    ],
-  },
-]);
+const PrivateRoutes = () => {
+  let auth = { token: true };
+  return auth.token ? (
+    <div>
+      <Navbar />
+      <Outlet />
+    </div>
+  ) : (
+    <Navigate to="/login" />
+  );
+};
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <PrivateOutlet />,
+//     children: [
+//       {
+//         path: "/",
+//         element: <Homepage />,
+//       },
+//       {
+//         path: "/ask-question",
+//         element: <AskQuestion />,
+//       },
+//       {
+//         path: "/question",
+//         element: <Question />,
+//       },
+//       { path: "/auth", element: <Auth /> },
+//     ],
+//   },
+// ]);
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -74,7 +111,26 @@ const App = () => {
 
   return (
     <div>
-      <RouterProvider router={router} />
+      {/* <RouterProvider router={router} />
+       */}
+      {/* <Routes>
+        <Route exact path="/" element={<Page />}>
+          <PrivateRoute exact path="/" element={<Homepage />} />
+          <Route exact path="/auth" element={<Auth />} />
+          <PrivateRoute exact path="/question" element={<Question />} />
+          <PrivateRoute exact path="/ask-question" element={<AskQuestion />} />
+        </Route>
+      </Routes> */}
+      <Router>
+        <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route exact path="/auth" element={<Auth />} />
+            <Route exact path="/" element={<Homepage />} />
+            <Route exact path="/add-question" element={<AskQuestion />} />
+            <Route exact path="/question" element={<Question />} />
+          </Route>
+        </Routes>
+      </Router>
     </div>
   );
 };

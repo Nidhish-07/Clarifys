@@ -1,6 +1,6 @@
 import React from "react";
 import Mainpage from "./Mainpage";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar";
 import axios from "axios";
 
 const Homepage = () => {
@@ -10,7 +10,7 @@ const Homepage = () => {
     await axios
       .get("http://localhost:3000/api/question")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setQuestions(res.data.reverse());
       })
       .catch((err) => {

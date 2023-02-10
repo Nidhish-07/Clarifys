@@ -5,14 +5,15 @@ import { TbStack3 } from "react-icons/tb";
 import { AiOutlineInbox } from "react-icons/ai";
 import { IoPersonCircleSharp } from "react-icons/io5";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/userSlice";
 import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const user = useSelector(selectUser);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="border-2 border-zinc-400 min-h-[48px] flex sticky z-50 top-0">
       <div className="flex w-full items-center justify-around bg-slate-200 shadow-xl">
@@ -44,19 +45,15 @@ const Navbar = () => {
               color="#ccc"
               className="cursor-pointer hover:bg-black rounded-full p-[0.5px]"
               size={32}
-              onClick={() =>{ auth.signOut();navigate("/auth")}}
+              onClick={() => {
+                auth.signOut();
+                navigate("/auth");
+              }}
               src={user?.photoURL}
             />
-            <AiOutlineInbox
-              color="#ccc"
-              className="cursor-pointer hover:bg-black rounded-full p-[0.5px]"
-              size={32}
-            />
-            <TbStack3
-              color="#ccc"
-              className="cursor-pointer hover:bg-black rounded-full p-[0.5px]"
-              size={32}
-            />
+            <Link to={"/auth"}>
+              <button className="p-2 text-white bg-blue-500 hover:bg-blue-700 rounded h-8 flex items-center">Login / SignUp</button>
+            </Link>
           </div>
         </div>
       </div>

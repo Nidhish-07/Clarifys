@@ -32,7 +32,7 @@ const Questions = (props) => {
         <div className="flex flex-col w-full ">
           <Link
             className="text-[1.1rem] text-blue-500 mb-2 hover:text-blue-800"
-            to={"/question"}
+            to={`/question?q=${props.question?._id}`}
           >
             {props.question?.title}
           </Link>
