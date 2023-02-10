@@ -1,8 +1,5 @@
 # Clarifys
 
-Team: VULCAN_FORGE
-Member: 1. Nidhish Chauhan
-
 ## Steps
 
 1. Install the dependencies in root, client and server folder.
