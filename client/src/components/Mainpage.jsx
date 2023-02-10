@@ -3,7 +3,7 @@ import { FaFilter } from "react-icons/fa";
 import Questions from "./Questions";
 import { Link } from "react-router-dom";
 
-const Mainpage = () => {
+const Mainpage = (props) => {
   return (
     <div className="flex py-7 px-2 flex-[0.75] flex-col md:flex-[0.6]">
       <div className="flex flex-col w-full ">
@@ -18,7 +18,7 @@ const Mainpage = () => {
           </Link>
         </div>
         <div className="flex items-center text-[1.1rem] text-[rgba(0,0,0,0.8)] justify-between pt-0 px-0 pb-2 mt-2">
-          <p>10</p>
+          <p> Questions: {props.questions && props.questions.length}</p>
           <div className="flex items-center">
             <div className="flex border border-solid border-stone-400 mr-5 rounded items-center gap-1 p-1">
               <div className="p-1">
@@ -38,13 +38,11 @@ const Mainpage = () => {
           </div>
         </div>
         <div className="flex flex-col w-full ">
-          <div className="flex flex-col  py-4 px-0 border-b border-b-gray-400">
-            <Questions />
-            <Questions />
-            <Questions />
-            <Questions />
-            <Questions />
-          </div>
+          {props.questions.map((question, index) => (
+            <div className="flex flex-col  py-4 px-0 border-b border-b-gray-400">
+              <Questions key={index} question={question} />
+            </div>
+          ))}
         </div>
       </div>
     </div>
