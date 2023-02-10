@@ -12,7 +12,7 @@ import { selectUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 
 const Question = () => {
-  const [showCommentBox, setShowCommentBox] = React.useState(false);
+  const [showCommentBox, setShowCommentBox] = useState(false);
 
   const [questionData, setQuestionData] = useState([]);
   const [comment, setComment] = useState("");
@@ -27,7 +27,7 @@ const Question = () => {
     await axios
       .get(`http://localhost:3000/api/question/${id}`)
       .then((res) => {
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
         setQuestionData(res.data[0]);
       })
       .catch((err) => {
@@ -54,13 +54,8 @@ const Question = () => {
         user: user,
       };
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
       await axios
-        .post(`http://localhost:3000/api/comment/${id}`, body, config)
+        .post(`http://localhost:3000/api/comment/${id}`, body)
         .then((res) => {
           setComment("");
           setShowCommentBox(false);
@@ -91,8 +86,6 @@ const Question = () => {
       })
       .catch((err) => console.log(err));
   };
-
-  console.log(questionData.comments);
 
   return (
     <div className="flex py-7 px-2 flex-[0.75] flex-col md:flex-[0.6]">
@@ -165,7 +158,7 @@ const Question = () => {
                             jane doe
                           </span>
                           <span className="p-1 bg-blue-200 text-white rounded-sm">
-                            timestamp
+                            {new Date(questionData?.comment?.createdAt).toLocaleString()}
                           </span>
                         </p>
                       );
@@ -182,6 +175,8 @@ const Question = () => {
                     <textarea
                       placeholder="Add your comment"
                       rows={5}
+                      value={comment}
+                      onChange={(e)=>setComment(e.target.value)}
                       className="my-1 mx-0 p-2 border border-[rgba(0,0,0,0.2)] rounded outline-none w-full resize-none"
                     ></textarea>
                     <button
